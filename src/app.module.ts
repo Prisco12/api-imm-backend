@@ -6,9 +6,10 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/nest'), UsersModule],
+  imports: [MongooseModule.forRoot('mongodb://localhost/nest'), UsersModule, AuthModule],
   controllers: [AppController],
   providers: [
     AppService,

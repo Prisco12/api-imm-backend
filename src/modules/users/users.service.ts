@@ -13,7 +13,7 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async create(createUserDto: CreateUserDto):Promise<UserDocument> {
-    const user = await this.findByEmail(createUserDto.email).catch(() => null);
+    const user = await this.findUserByEmail(createUserDto.email).catch(() => null);
     if (user) {
       throw new BadGatewayException(`User with email ${createUserDto.email} already exists.`);
     }
@@ -30,7 +30,7 @@ export class UsersService {
     return this.userModel.find();
   }
 
-  async findByEmail(email: string):Promise<UserDocument | null> {
+  async findUserByEmail(email: string):Promise<UserDocument | null> {
     const user = await this.userModel.findOne({ email });
 
     if (!user) {
